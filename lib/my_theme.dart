@@ -4,6 +4,9 @@ class MyTheme {
   ///backGroundColor
   static Color blackColor = const Color(0xff121312);
 
+  ///blackContainerColor
+  static Color blackContainerColor = const Color(0xff282A28);
+
   /// BottomNavigationBarColor
   static Color blackBNBColor = const Color(0xff1A1A1A);
 

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/my_theme.dart';
+import 'package:movies_app/home/search_screen-tap/search_tap.dart';
+import 'package:movies_app/home/watch_list_screen_tap/watch_list_tap.dart';
+
+import 'browse_screen_tap/browse_tap.dart';
+import 'home_screen_tap/home_tap.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "homeScreen";
@@ -44,6 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      body: listTap[selectedIndex],
     );
   }
+
+  List<Widget> listTap = [HomeTap(), SearchTap(), BrowseTap(), WatchListTap()];
 }

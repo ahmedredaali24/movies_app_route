@@ -55,7 +55,7 @@ class _FutureRecommendedState extends State<FutureRecommended> {
             );
           }
           var recommendedList = snapshot.data?.results ?? [];
-          return RecommendedWidget(resultsRecommendedList: recommendedList);
+          return InkWell(child: RecommendedWidget(resultsRecommendedList: recommendedList));
         });
   }
 }

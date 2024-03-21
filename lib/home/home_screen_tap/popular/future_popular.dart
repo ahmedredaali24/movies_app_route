@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:movies_app/api/movie_detail_api.dart';
+import 'package:movies_app/home/movie_details/movie_details.dart';
 import '../../../api/popular_api_manger.dart';
 import '../../../model/PopularResponse.dart';
 import '../../../my_theme.dart';
@@ -82,8 +83,17 @@ class _FuturePopularState extends State<FuturePopular> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: PopularWidget(
-                    results: popularList[itemIndex],
+                  child: InkWell(
+                    onTap: ()  {
+                      Navigator.of(context).pushNamed(MovieDetails.routeName,
+                          arguments:  MovieApiDetail.getMovieDetails(
+                              popularList[itemIndex].id ?? 0));
+                      setState(() {});
+                    },
+                    child: PopularWidget(
+                      results: popularList[itemIndex],
+                    ),
+
                   ),
                 ),
                 Text(

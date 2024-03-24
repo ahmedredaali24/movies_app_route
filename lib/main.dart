@@ -1,7 +1,9 @@
 //mineeee
 import 'package:flutter/material.dart';
+import 'package:movies_app/home/browse_screen_tap/browse_widget_list.dart';
 import 'package:movies_app/home/movie_details/movie_details.dart';
 import 'package:movies_app/my_theme.dart';
+
 import 'home/home_screen.dart';
 
 void main() {
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         MovieDetails.routeName: (context) => MovieDetails(),
+        BrowseListWidget.routeName: (context) => BrowseListWidget(),
       },
       theme: MyTheme.themeMode,
     );

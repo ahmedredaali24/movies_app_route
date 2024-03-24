@@ -3,20 +3,20 @@
 /// total_pages : 8
 /// total_results : 141
 
-class SearchMovieModel {
+class SearchMovie {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
 
-  SearchMovieModel({
+  SearchMovie({
     this.page,
     this.results,
     this.totalPages,
     this.totalResults,
   });
 
-  SearchMovieModel.fromJson(dynamic json) {
+  SearchMovie.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
       results = [];

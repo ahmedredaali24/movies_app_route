@@ -14,4 +14,15 @@ class ApiConst {
   //https://api.themoviedb.org/3/movie/top_rated
 
   static const String recommendedApi = "/3/movie/top_rated";
+
+  //https://api.themoviedb.org/3/search/movie
+
+  static const String searchApi = "/3/search/movie";
+
+  // https://api.themoviedb.org/3/movie/{movie_id}/similar
+
+  static const String similarApi = "/3/movie/{movie_id}/similar";
+
+  //https://api.themoviedb.org/3/movie/{movie_id}
+  static const String detailApi = "/3/movie/{movie_id}";
 }

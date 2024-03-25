@@ -92,8 +92,8 @@ class _SearchTapState extends State<SearchTap> {
                 ),
               if (results.isNotEmpty)
                 Expanded(
-                  child: FutureBuilder<SearchMovieModel>(
-                    future:  SearchApi.searchMovie(query),
+                  child: FutureBuilder<SearchMovie>(
+                    future: SearchApi.searchMovie(query),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_const.dart';
 
-import '../model/PopularResponse.dart';
 import '../model/SimilarMovie.dart';
 
 class SimilarApiMovie {
@@ -11,8 +10,9 @@ class SimilarApiMovie {
 
 
   static Future<SimilarMovie> getSimilarMovie(int movieID) async {
-    Uri url = Uri.https(ApiConst.baseUrl, ApiConst.popularApi,
-        {"api_key": "7fdaaf6372fc89fa838bf08fc2a3efa4"});    try {
+    Uri url = Uri.https(ApiConst.baseUrl, '/3/movie/$movieID/similar',
+        {"api_key": "7fdaaf6372fc89fa838bf08fc2a3efa4"});
+    try {
       var response = await http.get(url);
       var bodyString = response.body;
       var json = jsonDecode(bodyString);

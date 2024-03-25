@@ -16,6 +16,7 @@ class MovieDetails extends StatelessWidget {
     var args = ModalRoute.of(context)?.settings.arguments as MovieDetail;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(
           '${args.title}',
           style: TextStyle(

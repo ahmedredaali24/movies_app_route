@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../custom_widgets/clip_rrect_widget.dart';
+import '../../../custom_widgets/container_add_watch_list.dart';
 import '../../../model/UpcomingResponse.dart';
-import '../../../my_theme.dart';
 
 class MovieItem extends StatelessWidget {
   final ResultsUpcoming resultsUpcoming;
@@ -11,21 +11,24 @@ class MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: CachedNetworkImage(
-        imageUrl:
-            "https://image.tmdb.org/t/p/w500${resultsUpcoming.posterPath ?? ""}",
-        width: double.infinity,
-        height: double.infinity,
-        fit: BoxFit.fill,
-        placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(
-          backgroundColor: MyTheme.yellowColor,
-        )),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+    return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Stack(
+        children: [
+          ClipRRectWidget(
+              imagePath:
+                  "https://image.tmdb.org/t/p/w500${resultsUpcoming.posterPath ?? ""}",
+              boxFit: BoxFit.fill),
+          AddWatchList(
+            id: resultsUpcoming.id,
+            title: resultsUpcoming.title,
+            date: resultsUpcoming.releaseDate,
+            content: resultsUpcoming.originalLanguage,
+            image: resultsUpcoming.posterPath,
+            // imagePath: "assets/images/bookmark.png",
+          )
+        ],
       ),
-    ));
+    );
   }
 }

@@ -13,49 +13,64 @@ class FutureRecommended extends StatefulWidget {
 }
 
 class _FutureRecommendedState extends State<FutureRecommended> {
+  int currentPage = 1;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<RecommendedResponse?>(
-        future: RecommendedApiManger.getRecommendedResponse(),
+        future: RecommendedApiManger.getRecommendedResponse(
+            language: "er", page: currentPage),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: MyTheme.yellowColor,
-              ),
+            return Container(
+              color: MyTheme.blackContainerColor,
             );
           } else if (snapshot.hasError) {
-            return Column(
-              children: [
-                Text("error"),
-                MaterialButton(
-                  onPressed: () {
-                    RecommendedApiManger.getRecommendedResponse();
-                    setState(() {});
-                  },
-                  child: Text("reload"),
-                )
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("error", style: Theme.of(context).textTheme.titleSmall),
+                  MaterialButton(
+                    onPressed: () {
+                      RecommendedApiManger.getRecommendedResponse();
+                      setState(() {});
+                    },
+                    child: Text("reload",
+                        style: Theme.of(context).textTheme.titleSmall),
+                  )
+                ],
+              ),
             );
           } else if (snapshot.data?.success == false) {
-            return Column(
-              children: [
-                Text(
-                  snapshot.data?.statusMessage ?? "",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    RecommendedApiManger.getRecommendedResponse();
-                    setState(() {});
-                  },
-                  child: Text("reload"),
-                )
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    snapshot.data?.statusMessage ?? "",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      RecommendedApiManger.getRecommendedResponse();
+                      setState(() {});
+                    },
+                    child: Text("reload",
+                        style: Theme.of(context).textTheme.titleSmall),
+                  )
+                ],
+              ),
             );
           }
           var recommendedList = snapshot.data?.results ?? [];
-          return InkWell(child: RecommendedWidget(resultsRecommendedList: recommendedList));
+          return RecommendedWidget(
+              pagination: loadNewPage, resultsRecommendedList: recommendedList);
         });
+  }
+
+  void loadNewPage() {
+    currentPage++;
+    setState(() {});
   }
 }

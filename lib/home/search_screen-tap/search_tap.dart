@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/api/movie_detail_api.dart';
-import 'package:movies_app/api/search_api.dart';
 import 'package:movies_app/home/search_screen-tap/search_item.dart';
-import 'package:movies_app/model/SearchMovie.dart';
-import 'package:movies_app/my_theme.dart';
 
-import '../movie_details/movie_details.dart';
+import '../../api/Search_api_manger.dart';
+import '../../model/searchResponse.dart';
+import '../../my_theme.dart';
+import '../home_screen_tap/movies_detailes/movie_details_screen.dart';
 
 class SearchTap extends StatefulWidget {
+  const SearchTap({super.key});
+
   @override
   State<SearchTap> createState() => _SearchTapState();
 }
@@ -15,7 +16,7 @@ class SearchTap extends StatefulWidget {
 class _SearchTapState extends State<SearchTap> {
   String query = '';
 
-  List<Results> results = [];
+  List<ResultSearch> results = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _SearchTapState extends State<SearchTap> {
                   if (text.isNotEmpty) {
                     query = text;
                     SearchApi.searchMovie(query).then((value) {
-                      results = value.results ?? [];
+                      results = value?.results ?? [];
                       setState(() {});
                     });
                   } else {
@@ -42,7 +43,7 @@ class _SearchTapState extends State<SearchTap> {
                   if (text.isNotEmpty) {
                     query = text;
                     SearchApi.searchMovie(query).then((value) {
-                      results = value.results ?? [];
+                      results = value?.results ?? [];
                       setState(() {});
                     });
                   } else {
@@ -78,7 +79,7 @@ class _SearchTapState extends State<SearchTap> {
                   child: Column(
                     children: [
                       const Spacer(),
-                      Image.asset('assets/icons/noMoviesFound.png'),
+                      Image.asset('assets/images/noMoviesFound.png'),
                       const SizedBox(
                         height: 7,
                       ),
@@ -92,7 +93,7 @@ class _SearchTapState extends State<SearchTap> {
                 ),
               if (results.isNotEmpty)
                 Expanded(
-                  child: FutureBuilder<SearchMovie>(
+                  child: FutureBuilder<SearchResponse?>(
                     future: SearchApi.searchMovie(query),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -118,12 +119,15 @@ class _SearchTapState extends State<SearchTap> {
                       var searchList = snapshot.data?.results ?? [];
                       return ListView.separated(
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () async {
-                              Navigator.of(context).pushNamed(
-                                MovieDetails.routeName,
-                                arguments: await MovieApiDetail.getMovieDetails(
-                                    searchList[index].id ?? 0),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MovieDetailsScreen(
+                                    moveId: searchList[index].id ?? 0,
+                                  ),
+                                ),
                               );
                             },
                             child: SearchItem(

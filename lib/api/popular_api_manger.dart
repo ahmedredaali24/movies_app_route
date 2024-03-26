@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:movies_app/api/api_const.dart';
 
 import '../model/PopularResponse.dart';
+import 'api_const.dart';
 
 class PopularApiManger {
   // https://api.themoviedb.org/3/tv/popular?api_key=7fdaaf6372fc89fa838bf08fc2a3efa4

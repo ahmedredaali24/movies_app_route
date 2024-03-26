@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/my_theme.dart';
+
+import '../../custom_widgets/clip_rrect_widget.dart';
+import '../../custom_widgets/container_add_watch_list.dart';
+import '../../my_theme.dart';
 
 class SearchItem extends StatelessWidget {
-  String image;
+  final String image;
 
-  String title;
+  final String title;
 
-  String date;
+  final String date;
 
-  String content;
+  final String content;
 
-  SearchItem({
+  const SearchItem({
+    super.key,
     required this.image,
     required this.title,
     required this.date,
@@ -32,12 +36,19 @@ class SearchItem extends StatelessWidget {
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Stack(
                 children: [
-                  Image.network(
-                    'https://image.tmdb.org/t/p/w600_and_h900_bestv2$image',
-                    fit: BoxFit.cover,
-                    width: 200,
-                  ),
-                  Image.asset('assets/icons/bookmark.png'),
+                  SizedBox(
+                      width: double.infinity,
+                      child: ClipRRectWidget(
+                        imagePath: 'https://image.tmdb.org/t/p/w500$image',
+                        boxFit: BoxFit.fill,
+                      )),
+                  AddWatchList(
+                    title: title,
+                    date: date,
+                    content: content,
+                    image: image,
+                    // imagePath: "assets/images/bookmark.png",
+                  )
                 ],
               ),
             ),

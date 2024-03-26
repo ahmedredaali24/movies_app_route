@@ -21,8 +21,12 @@ class MyTheme {
 
   ///yellowColor_ BottomNavigationBar
   static Color yellowIconColor = const Color(0xffFFBB3B);
+  static Color appBarIconColor = const Color(0xff1D1E1D);
 
   static ThemeData themeMode = ThemeData(
+
+      // bottomAppBarTheme: BottomAppBarTheme(color: Colors.red,surfaceTintColor: Colors.red,),
+      appBarTheme: AppBarTheme(backgroundColor: appBarIconColor),
       scaffoldBackgroundColor: blackColor,
       buttonTheme: ButtonThemeData(buttonColor: whiteColor),
       primaryColor: blackBNBColor,

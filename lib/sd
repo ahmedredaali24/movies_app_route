@@ -1,8 +1,0 @@
-* added 2 json file in model package
-  -GenreMovieDetails.dart
-  -GenreMovieModel.dart
-* added 2 dart file in browse screen package.
-* added 2 file in api package
-  -genres_movie_api
-  -genres_movie_details_api
-

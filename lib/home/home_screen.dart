@@ -8,7 +8,7 @@ import 'home_screen_tap/home_tap.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = "homeScreen";
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -52,5 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> listTap = [HomeTap(), SearchTap(), BrowseTap(), WatchListTap()];
+  List<Widget> listTap = [
+    const HomeTap(),
+    const SearchTap(),
+    BrowseTap(),
+    const WatchListTap()
+  ];
 }
